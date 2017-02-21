@@ -9,9 +9,18 @@ cleaner.style = True
 cleaner.scripts = True
 pathSave =  os.path.join(os.getcwd(),"plaintext.txt")
 
+def cleanText(text):
+        data = text.split()
+        t = ""
+        for d in data:
+                t +=d+" "
+        t = t[:-1]+"\n"
+        return t
+
 def htmlParser(htmlfile):
         text = cleaner.clean_html(fs(htmlfile)).text_content()
-        text2save = text.replace("\n"," ")+"\n"
+        textReplaced = text.replace("\n"," ").replace("\t"," ")+"\n"
+        text2save = cleanText(textReplaced)
         with open(pathSave,'a',encoding='utf-8') as file2save:
                 file2save.write(text2save)
 
